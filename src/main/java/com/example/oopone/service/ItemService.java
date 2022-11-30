@@ -42,7 +42,7 @@ public class ItemService {
         item1.setCategory(item.getCategory());
         item1.setDescription(item.getDescription());
         item1.setImg_name(item.getImg_name());
-
+        itemRepo.save(item1);
         return item1;
     }
 
@@ -50,5 +50,7 @@ public class ItemService {
         return itemRepo.max();
     }
 
-
+    public List<Item> getAllItemsByCategoryId(int id){
+        return itemRepo.findAllByCategory_Id(id);
+    }
 }
