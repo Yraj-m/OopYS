@@ -29,8 +29,10 @@ public class Item {
     private String description;
     private String img_name;
 
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id",referencedColumnName = "category_id")
     private Category category;
+
+
 
 }

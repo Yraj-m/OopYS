@@ -7,6 +7,7 @@ import com.example.oopone.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,6 +66,13 @@ public class AdminController {
     public List<Item> getItems(){
         return itemService.getItems();
     }
+
+    //IN PROCESS.
+    @GetMapping("/admin/item/maxoffer")
+    public BigDecimal getItemByMaxOffer(){
+        return itemService.maxOffer();
+    }
+
 
     // Adding new items.
     @PostMapping("/admin/items/add/{id}")

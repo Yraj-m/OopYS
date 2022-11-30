@@ -32,6 +32,7 @@ public class CategoryService {
     {
         Category category1 = categoryRepo.findById(id).orElseThrow(RuntimeException::new);
         category1.setCategory_name(category.getCategory_name());
+        categoryRepo.save(category1);
         return category1;
     }
 

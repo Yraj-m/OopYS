@@ -48,7 +48,7 @@ public class ItemService {
 
     public BigDecimal maxOffer(){
         return itemRepo.max();
-    };
+    }
 
 
 }
