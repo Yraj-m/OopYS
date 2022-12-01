@@ -46,11 +46,16 @@ public class ItemService {
         return item1;
     }
 
-    public BigDecimal maxOffer(){
-        return itemRepo.max();
+
+    public Item getItemWithMaxOffer(){
+        return itemRepo.findTopByOrderByOfferDesc();
     }
 
     public List<Item> getAllItemsByCategoryId(int id){
         return itemRepo.findAllByCategory_Id(id);
+    }
+
+    public List<Item> getItemsWithLessPrice(){
+        return itemRepo.findTop9ByOrderByPriceAsc();
     }
 }

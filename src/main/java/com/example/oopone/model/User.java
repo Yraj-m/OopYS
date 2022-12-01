@@ -42,7 +42,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id"))
     private List<Role> roles;
 
-
-
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_id",referencedColumnName = "id")
+    private List<Cart> cart;
 
 }

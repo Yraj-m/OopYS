@@ -69,8 +69,14 @@ public class AdminController {
 
     //IN PROCESS.
     @GetMapping("/admin/item/maxoffer")
-    public BigDecimal getItemByMaxOffer(){
-        return itemService.maxOffer();
+    public Item getItemByMaxOffer(){
+        return itemService.getItemWithMaxOffer();
+    }
+
+
+    @GetMapping("/admin/items/category/{id}")
+    public List<Item> getItemsByCategory(@PathVariable int id){
+        return itemService.getAllItemsByCategoryId(id);
     }
 
 

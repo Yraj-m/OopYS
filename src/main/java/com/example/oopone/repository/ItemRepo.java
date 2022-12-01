@@ -12,6 +12,10 @@ import java.util.List;
 public interface ItemRepo extends JpaRepository<Item,Integer> {
     List<Item> findAllByCategory_Id(int id);
 
-    @Query(value = "SELECT max(offer) FROM Item")
-    BigDecimal max();
+    Item findTopByOrderByOfferDesc();
+
+    List<Item> findTop9ByOrderByPriceAsc();
+
+
+
 }
