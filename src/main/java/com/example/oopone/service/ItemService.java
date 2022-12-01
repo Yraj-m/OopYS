@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class ItemService {
 
@@ -26,6 +28,10 @@ public class ItemService {
         Category category = categoryRepo.findById(id).orElse(null);
         item.setCategory(category);
         return itemRepo.save(item);
+    }
+
+    public Optional<Item> getItemById(int id){
+        return itemRepo.findById(id);
     }
 
     public void removeItemById(int id){
