@@ -36,19 +36,19 @@ public class AdminController {
     //------CATEGORIES
 
     // Clicking on categories, takes me to all the categories present.
-    @GetMapping(value = "/categories")
+    @GetMapping(value = "/admin/categories")
     public List<Category> getCat(){
         return categoryService.getCategories();
     }
 
     //Get Category name by Id
-    @GetMapping(value = "/category/{id}")
+    @GetMapping(value = "/admin/category/{id}")
     public Optional<Category> getCatById(@PathVariable int id){
         return categoryService.getCategoryById(id);
     }
 
     //Adding new categories.
-    @PostMapping(value = "/categories/add")
+    @PostMapping(value = "/admin/categories/add")
     public Category addCategory(@RequestBody Category category){
         return categoryService.saveCategory(category);
     }
