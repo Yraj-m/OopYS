@@ -55,4 +55,8 @@ public class CartItemsService {
         }
         return sum;
     }
+
+    public void deleteAllItemsFromCart(int user_id){
+        cartItemsRepo.deleteAllByUserid(user_id);
+    }
 }
