@@ -16,7 +16,8 @@ public interface CartItemsRepo extends JpaRepository<CartItems,Integer> {
     public Boolean existsByUseridAndItem(int userid, Item  item);
     public CartItems findByUseridAndItem(int userid , Item  item);
 
-    public void deleteByUseridAndItem(int userid, Item  item);
+    @Transactional
+    public void deleteAllByUserid(int userid);
 
     public List<CartItems> findAllByUserid(int userid);
 
