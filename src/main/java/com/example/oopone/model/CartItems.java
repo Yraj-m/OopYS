@@ -20,6 +20,8 @@ public class CartItems {
 
     private int quantity_in_cart;
 
+
+    @Column(nullable = false )
     private int userid;
 
     public CartItems(Item item, int quantity_in_cart, int userid) {

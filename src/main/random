@@ -73,8 +73,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 THINGS LEFT TO DO:
 
-1) Manager - Done
-2) Cart
+1) Manager - DONEEEEEEEEE
+2) Cart - DONEEEEE
 3) PDF Generation - Front End
 4) Wallet ???
 5) Security Configuration - Added GoogleAuth, left to add dependencies.
