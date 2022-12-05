@@ -21,13 +21,19 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
+
     @DeleteMapping("/order/{userid}")
     public void order(@PathVariable int userid){
         cartItemsService.deleteAllItemsFromCart(userid);
     }
 
     @PostMapping("/addOrder/{userid}")
-    public void addOrderedProductsInCart(@PathVariable int userid){
-        orderService.addOrderedProducts(userid);
+    public String addOrderedProductsInCart(@PathVariable int userid){
+        return orderService.addOrderedProducts(userid);
+    }
+
+    @GetMapping("/orderHistory/{userid}")
+    public List<OrderDto> getOrderHistoryByUserId(@PathVariable int userid){
+        return orderService.getOrderHistoryWithUserId(userid);
     }
 }

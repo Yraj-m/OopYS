@@ -6,6 +6,7 @@ import com.example.oopone.dto.UserDto;
 import com.example.oopone.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.example.oopone.exception.UserAlreadyExistsException;
 
 import java.util.List;
 
@@ -29,7 +30,11 @@ public class UserService {
     }
 
     public User saveUser(User user) {
-        return userRepo.save(user);
+        if(userRepo.findUserByEmailid(user.getEmailid()).isPresent())
+        {
+            throw new UserAlreadyExistsException("User Already Exists");
+        }
+            return userRepo.save(user);
     }
 
     public void removeUser(int id){
