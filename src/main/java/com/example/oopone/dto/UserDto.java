@@ -1,6 +1,7 @@
-package com.example.oopone.model;
+package com.example.oopone.dto;
 
 
+import com.example.oopone.model.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;

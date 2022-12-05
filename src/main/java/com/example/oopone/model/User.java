@@ -19,7 +19,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false)
     @NotEmpty
     private String username;
 
@@ -28,7 +28,7 @@ public class User {
 
     private int phonenumber;
 
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false)
     @NotEmpty
     @Email(message = "{Invalid Email!!}")
     private String emailid;

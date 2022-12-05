@@ -2,9 +2,8 @@ package com.example.oopone.controller;
 
 
 
-import com.example.oopone.model.Category;
 import com.example.oopone.model.User;
-import com.example.oopone.model.UserDto;
+import com.example.oopone.dto.UserDto;
 import com.example.oopone.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

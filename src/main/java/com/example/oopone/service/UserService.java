@@ -2,13 +2,12 @@ package com.example.oopone.service;
 
 
 import com.example.oopone.model.User;
-import com.example.oopone.model.UserDto;
+import com.example.oopone.dto.UserDto;
 import com.example.oopone.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -37,8 +36,5 @@ public class UserService {
         userRepo.deleteById(id);
     }
 
-//    public List<Cart> getUserCart(int id) {
-//        return userRepo.findById(id).get().getCarts();
-//    }
 
 }

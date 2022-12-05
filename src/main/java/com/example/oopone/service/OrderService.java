@@ -10,6 +10,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -33,11 +34,27 @@ public class OrderService {
             OrderItems orderItems = new OrderItems(
                     var.getQuantity_in_cart(),orders,var.getItem()
 
-            );
-            orderItemsRepo.save(orderItems);
+                    );
+                    cartItemsRepo.deleteById(var.getId());
+                    orderItemsRepo.save(orderItems);
+                    user.setWallet_amt(user.getWallet_amt() - sum);
+                }
+
+                ordersRepo.save(orders);
+                return "Added Order Successfully";
+            }
         }
 
-        ordersRepo.save(orders);
-
     }
+
+    public List<OrderDto> getOrderHistoryWithUserId(int user_id) {
+
+        List<OrderDto> orderDtoList = new ArrayList<>();
+        for (Orders var : ordersRepo.findAllByUserid(user_id)) {
+            orderDtoList.add(new OrderDto(var));
+
+        }
+        return orderDtoList;
+    }
+
 }
