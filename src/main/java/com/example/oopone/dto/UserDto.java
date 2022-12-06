@@ -2,6 +2,7 @@ package com.example.oopone.dto;
 
 
 import com.example.oopone.model.User;
+import com.example.oopone.repository.UserRepo;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -9,11 +10,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 @Data
 @AllArgsConstructor@NoArgsConstructor@ToString
 public class UserDto {
+
 
     private int id;
 
@@ -35,4 +38,5 @@ public class UserDto {
         this.emailid = user.getEmailid();
         this.wallet_amt = user.getWallet_amt();
     }
+
 }

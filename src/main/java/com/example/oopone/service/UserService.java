@@ -44,6 +44,11 @@ public class UserService {
         }
             return userRepo.save(user);
     }
+    public void updateUserWallet(User user) {
+        User user1 = userRepo.findById(user.getId()).get();
+        user1.setWallet_amt(user.getWallet_amt());
+        userRepo.save(user1);
+    }
 
     public void removeUser(int id){
         userRepo.deleteById(id);
