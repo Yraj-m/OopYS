@@ -12,13 +12,5 @@ import lombok.ToString;
 @ToString
 public class PaymentUserDto {
 
-    private String username;
-
-    private String password;
-
-    private int phonenumber;
-
-    private String emailid;
-
     private double amt_to_add;
 }

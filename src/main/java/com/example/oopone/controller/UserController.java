@@ -20,8 +20,8 @@ public class UserController {
     UserService userService;
 
     @PostMapping(value = "/user/add")
-    public User addUser(@RequestBody User user, HttpServletRequest request) throws ServletException{
-        return userService.saveUser(user,request);
+    public User addUser(@RequestBody User user){
+        return userService.saveUser(user);
     }
 
     @GetMapping(value = "/users")

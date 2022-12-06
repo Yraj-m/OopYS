@@ -16,13 +16,11 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.HashMap;
 
 @CrossOrigin
 @RestController
@@ -53,23 +51,25 @@ public class PaymentController {
         this.client =  new RazorpayClient(SECRET_ID, SECRET_KEY);
     }
 
-    @PostMapping(value="/add/wallet")
-    public ResponseEntity<String> createOrder(@RequestBody PaymentUserDto paymentUserDto) {
-        User user = userRepo.findUserByEmailid(paymentUserDto.getEmailid()).get();
-        System.out.println(user);
-        try {
+    @PostMapping(value="/add/wallet/{userid}")
+    public ResponseEntity<String> createOrder(@PathVariable  int userid, @RequestHeader HashMap<String, String> header, @RequestBody PaymentUserDto paymentUserDto) {
+        User user = userRepo.findUserById(userid).get();
+        if(user.getPassword().equals(header.get("token"))) {
+            System.out.println(user);
+            try {
 
-            Order order = createRazorPayOrder( String.valueOf(paymentUserDto.getAmt_to_add()));
-            RazorPay razorPay = getRazorPay((String)order.get("id"), paymentUserDto);
-            user.setWallet_amt(user.getWallet_amt() + paymentUserDto.getAmt_to_add());
-            userService.updateUserWallet(user);
-            return new ResponseEntity<String>(gson.toJson(getResponse(razorPay, 200)),
-                    HttpStatus.OK);
-        } catch (RazorpayException e) {
-            e.printStackTrace();
+                Order order = createRazorPayOrder(String.valueOf(paymentUserDto.getAmt_to_add()));
+                RazorPay razorPay = getRazorPay((String) order.get("id"), paymentUserDto);
+                user.setWallet_amt(user.getWallet_amt() + paymentUserDto.getAmt_to_add());
+                userService.updateUserWallet(user);
+                return new ResponseEntity<String>(gson.toJson(getResponse(razorPay, 200)),
+                        HttpStatus.OK);
+            } catch (RazorpayException e) {
+                e.printStackTrace();
+            }
         }
         return new ResponseEntity<String>(gson.toJson(getResponse(new RazorPay(), 500)),
-                HttpStatus.EXPECTATION_FAILED);
+        HttpStatus.EXPECTATION_FAILED);
     }
 
     private Response getResponse(RazorPay razorPay, int statusCode) {
@@ -82,8 +82,6 @@ public class PaymentController {
     private RazorPay getRazorPay(String orderId, PaymentUserDto paymentUserDto) {
         RazorPay razorPay = new RazorPay();
         razorPay.setApplicationFee(convertRupeeToPaise(String.valueOf(paymentUserDto.getAmt_to_add())));
-        razorPay.setCustomerName(paymentUserDto.getUsername());
-        razorPay.setCustomerEmail(paymentUserDto.getEmailid());
         razorPay.setMerchantName("Test");
         razorPay.setPurchaseDescription("TEST PURCHASES");
         razorPay.setRazorpayOrderId(orderId);
