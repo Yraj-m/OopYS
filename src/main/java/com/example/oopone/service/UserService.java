@@ -1,6 +1,7 @@
 package com.example.oopone.service;
 
 
+import com.example.oopone.model.Role;
 import com.example.oopone.model.User;
 import com.example.oopone.dto.UserDto;
 import com.example.oopone.repository.RoleRepo;
@@ -45,7 +46,7 @@ public class UserService {
         return userDto;
     }
 
-    public User saveUser(User user) {
+    public User saveUser(User user, HttpServletRequest request) throws ServletException {
         if(userRepo.findUserByEmailid(user.getEmailid()).isPresent())
         {
             throw new UserAlreadyExistsException("User Already Exists");

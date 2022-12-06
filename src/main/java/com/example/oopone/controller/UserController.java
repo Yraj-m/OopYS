@@ -5,6 +5,8 @@ package com.example.oopone.controller;
 import com.example.oopone.model.User;
 import com.example.oopone.dto.UserDto;
 import com.example.oopone.service.UserService;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +20,8 @@ public class UserController {
     UserService userService;
 
     @PostMapping(value = "/user/add")
-    public User addUser(@RequestBody User user){
-        return userService.saveUser(user);
+    public User addUser(@RequestBody User user, HttpServletRequest request) throws ServletException{
+        return userService.saveUser(user,request);
     }
 
     @GetMapping(value = "/users")
