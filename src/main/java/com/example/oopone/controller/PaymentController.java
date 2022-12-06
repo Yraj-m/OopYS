@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+@CrossOrigin
 @RestController
 public class PaymentController {
 
@@ -59,11 +61,7 @@ public class PaymentController {
 
             Order order = createRazorPayOrder( String.valueOf(paymentUserDto.getAmt_to_add()));
             RazorPay razorPay = getRazorPay((String)order.get("id"), paymentUserDto);
-            System.out.println(user.getWallet_amt());
-            System.out.println(user.getWallet_amt() + paymentUserDto.getAmt_to_add());
             user.setWallet_amt(user.getWallet_amt() + paymentUserDto.getAmt_to_add());
-            System.out.println(user.getWallet_amt());
-            System.out.println(user);
             userService.updateUserWallet(user);
             return new ResponseEntity<String>(gson.toJson(getResponse(razorPay, 200)),
                     HttpStatus.OK);
