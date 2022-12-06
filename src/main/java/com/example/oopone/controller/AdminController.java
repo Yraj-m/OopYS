@@ -4,6 +4,7 @@ import com.example.oopone.model.Category;
 import com.example.oopone.model.Item;
 import com.example.oopone.service.CategoryService;
 import com.example.oopone.service.ItemService;
+import com.example.oopone.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,6 +25,9 @@ public class AdminController {
 
     @Autowired
     ItemService itemService;
+
+    @Autowired
+    UserService userService;
 
     public static String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/productImages";
 
@@ -104,4 +108,10 @@ public class AdminController {
     public Item updateItem(@PathVariable int id, @RequestBody Item item){
         return itemService.updateItemById(id,item);
     }
+
+    @DeleteMapping("/admin/user/delete/{id}")
+    public void deleteUser(@PathVariable int id){
+        userService.removeUser(id);
+    }
+
 }

@@ -45,7 +45,7 @@ public class ItemService {
         item1.setPrice(item.getPrice());
         item1.setDelivery_time(item.getDelivery_time());
         item1.setQty_avlb(item.getQty_avlb());
-        item1.setCategory(item.getCategory());
+        //item1.setCategory(item.getCategory());
         item1.setDescription(item.getDescription());
         item1.setImg_name(item.getImg_name());
         itemRepo.save(item1);

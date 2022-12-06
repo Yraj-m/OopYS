@@ -22,7 +22,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/users")
-    public List<User> getUser(){
+    public List<UserDto> getUser(){
         return userService.getUsers();
     }
 
