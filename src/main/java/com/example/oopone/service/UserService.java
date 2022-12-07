@@ -45,7 +45,7 @@ public class UserService {
         return userDto;
     }
 
-    public User saveUser(User user) {
+    public UserDto saveUser(User user) {
         if(userRepo.findUserByEmailid(user.getEmailid()).isPresent())
         {
             throw new UserAlreadyExistsException("User Already Exists");
@@ -53,7 +53,9 @@ public class UserService {
             List<Role> roles = new ArrayList<>();
             roles.add(roleRepo.findById(3).get());
             user.setRoles(roles);
-            return userRepo.save(user);
+            userRepo.save(user);
+            UserDto userDto = new UserDto(user);
+            return userDto;
     }
     public void updateUserWallet(User user) {
         User user1 = userRepo.findById(user.getId()).get();
